@@ -1,0 +1,39 @@
+CREATE DATABASE IF NOT EXISTS Cinema;
+
+USE Cinema;
+
+CREATE TABLE Cinema.Atores (
+  Id INT AUTO_INCREMENT PRIMARY KEY,
+  PrimeiroNome VARCHAR(20),
+  UltimoNome VARCHAR(20),
+  Genero VARCHAR(1)
+);
+
+CREATE TABLE Cinema.Filmes (
+  Id INT AUTO_INCREMENT PRIMARY KEY,
+  Nome VARCHAR(50),
+  Ano YEAR,
+  Duracao INT
+);
+
+CREATE TABLE Cinema.ElencoFilme (
+  Id INT AUTO_INCREMENT PRIMARY KEY,
+  IdAtor INT NOT NULL,
+  IdFilme INT,
+  Papel VARCHAR(30),
+  FOREIGN KEY (IdAtor) REFERENCES Atores(Id),
+  FOREIGN KEY (IdFilme) REFERENCES Filmes(Id)
+);
+
+CREATE TABLE Cinema.Generos (
+  Id INT AUTO_INCREMENT PRIMARY KEY,
+  Genero VARCHAR(20)
+);
+
+CREATE TABLE Cinema.FilmesGenero (
+  Id INT AUTO_INCREMENT PRIMARY KEY,
+  IdGenero INT,
+  IdFilme INT,
+  FOREIGN KEY (IdGenero) REFERENCES Generos(Id),
+  FOREIGN KEY (IdFilme) REFERENCES Filmes(Id)
+);
